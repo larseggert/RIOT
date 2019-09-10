@@ -217,7 +217,7 @@ int rtcio_config_sleep_mode (gpio_t pin, bool mode, bool input)
                 RTCIO.touch_pad[idx].fun_sel = 0;      /* RTC mux function 0 */
                 RTCIO.touch_pad[idx].slp_sel = mode;   /* sleep mode */
                 RTCIO.touch_pad[idx].slp_ie  = input;  /* input enabled */
-                RTCIO.touch_pad[idx].slp_oe  = ~input; /* output enabled*/
+                RTCIO.touch_pad[idx].slp_oe  = !input; /* output enabled*/
                 break;
 
         case RTCIO_ADC_ADC1: /* GPIO34, RTC4 */
@@ -240,7 +240,7 @@ int rtcio_config_sleep_mode (gpio_t pin, bool mode, bool input)
                 RTCIO.pad_dac[idx].fun_sel = 0;      /* RTC mux function 0 */
                 RTCIO.pad_dac[idx].slp_sel = mode;   /* sleep mode */
                 RTCIO.pad_dac[idx].slp_ie  = input;  /* input enabled */
-                RTCIO.pad_dac[idx].slp_oe  = ~input; /* output enabled*/
+                RTCIO.pad_dac[idx].slp_oe  = !input; /* output enabled*/
                 break;
         default:
                 LOG_TAG_ERROR("gpio", "GPIO %d is not an RTCIO pin and "

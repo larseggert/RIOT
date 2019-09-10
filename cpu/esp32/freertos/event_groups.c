@@ -29,21 +29,20 @@ EventGroupHandle_t xEventGroupCreate (void)
 void vEventGroupDelete (EventGroupHandle_t xEventGroup)
 {
     ets_printf("%s\n", __func__);
-    return NULL;
 }
 
 EventBits_t xEventGroupSetBits (EventGroupHandle_t xEventGroup,
                                 const EventBits_t uxBitsToSet)
 {
     ets_printf("%s\n", __func__);
-    return NULL;
+    return 0;
 }
 
 EventBits_t xEventGroupClearBits (EventGroupHandle_t xEventGroup,
                                   const EventBits_t uxBitsToClear )
 {
     ets_printf("%s\n", __func__);
-    return NULL;
+    return 0;
 }
 
 EventBits_t xEventGroupWaitBits (const EventGroupHandle_t xEventGroup,
@@ -53,7 +52,7 @@ EventBits_t xEventGroupWaitBits (const EventGroupHandle_t xEventGroup,
                                  TickType_t xTicksToWait)
 {
     ets_printf("%s\n", __func__);
-    return NULL;
+    return 0;
 }
 
 #endif /* DOXYGEN */
