@@ -1,0 +1,15 @@
+# PKG_SOURCE_DIR ?= $(PKGDIRBASE)/msquic
+
+# INCLUDES += -I$(PKG_SOURCE_DIR)
+#INCLUDES += -I$(PKG_SOURCE_DIR)/lib
+#INCLUDES += -I$(PKG_SOURCE_DIR)/app
+INCLUDES += -I$(BINDIR)/msquic/include
+
+#DIRS += $(RIOTPKG)/msquic/contrib
+#ARCHIVES += $(BINDIR)/msquic.a
+
+ifneq (,$(filter msquic,$(USEPKG)))
+  CFLAGS += -DCX_PLATFORM_RIOT -Wno-unknown-pragmas -Wno-strict-prototypes \
+            -Wno-old-style-definition -Wno-format
+endif
+

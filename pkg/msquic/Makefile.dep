@@ -1,0 +1,11 @@
+# FEATURES_REQUIRED += arch_32bit
+
+#USEMODULE += esp_wifi
+
+USEMODULE += auto_init_gnrc_netif
+USEMODULE += gnrc_ipv6_default
+USEMODULE += gnrc_netdev_default
+USEMODULE += sock_udp
+USEMODULE += posix_inet
+USEMODULE += posix_sockets
+
