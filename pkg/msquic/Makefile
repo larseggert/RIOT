@@ -12,21 +12,18 @@ include $(RIOTBASE)/pkg/pkg.mk
 
 CMAKE_MINIMAL_VERSION = 3.16
 
-CFLAGS = $(INCLUDES)
-
-# ifeq (llvm,$(TOOLCHAIN))
-#   RIOT_CFLAGS += -Wno-char-subscripts
-# endif
+CFLAGS = $(INCLUDES) $(CFLAGS_CPU) -ffunction-sections -fdata-sections --std=gnu99
 
 TOOLCHAIN_FILE = $(PKG_SOURCE_DIR)/xcompile-toolchain.cmake
 
 all: $(BINDIR)/libmsquic.a
 
-$(BINDIR)/libmsquic.a: $(PKG_BUILD_DIR)/obj/Release/libmsquic_static.a
+$(BINDIR)/libmsquic.a: $(PKG_BUILD_DIR)/bin/Release/libmsquic.a
 	cmake --install $(PKG_BUILD_DIR) --prefix $(BINDIR)
+	cp $(PKG_BUILD_DIR)/bin/Release/libmsquic.a $(BINDIR)/libmsquic.a
 
-$(PKG_BUILD_DIR)/obj/Release/libmsquic_static.a: $(PKG_BUILD_DIR)/Makefile
-	cmake --build $(PKG_BUILD_DIR)
+$(PKG_BUILD_DIR)/bin/Release/libmsquic.a: $(PKG_BUILD_DIR)/Makefile
+	cmake --build $(PKG_BUILD_DIR) --target msquic_lib
 
 $(PKG_BUILD_DIR)/Makefile: $(PKG_PREPARED) $(TOOLCHAIN_FILE) | ..cmake_version_supported
 	cmake -B$(PKG_BUILD_DIR) -H$(PKG_SOURCE_DIR) \
@@ -35,6 +32,7 @@ $(PKG_BUILD_DIR)/Makefile: $(PKG_PREPARED) $(TOOLCHAIN_FILE) | ..cmake_version_s
 		-DQUIC_ENABLE_LOGGING=OFF \
 		-DCMAKE_TOOLCHAIN_FILE=$(TOOLCHAIN_FILE) \
 		-DCMAKE_C_FLAGS="$(CFLAGS)" \
+		-DCMAKE_BUILD_TYPE=MinSizeRel \
 		-DCX_PLATFORM=riot
 
 $(TOOLCHAIN_FILE): FORCE
@@ -46,10 +44,7 @@ $(TOOLCHAIN_FILE): FORCE
 	CMAKE_VERSION=$$(cmake --version | sed -n '1 {s/cmake version //;s/-rc.*//;p;}'); \
 	$(RIOTTOOLS)/has_minimal_version/has_minimal_version.sh "$${CMAKE_VERSION}" "$(CMAKE_MINIMAL_VERSION)" cmake
 
-# ifneq (,$(filter -Wformat-nonliteral -Wformat=2, $(CFLAGS)))
-#   CFLAGS += -Wno-format-nonliteral
-# endif
-
+# to avoid clobbering local msquic source changes:
 $(PKG_PATCHED): $(PKG_PATCHED_PREREQUISITES)
 	touch $@
 $(PKG_DOWNLOADED): $(MAKEFILE_LIST)
