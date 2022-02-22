@@ -1,0 +1,6 @@
+INCLUDES += -I$(PKGDIRBASE)/libnfs/include
+INCLUDES += -I$(PKGDIRBASE)/libnfs/include/nfsc
+INCLUDES += -I$(PKGDIRBASE)/libnfs/mount
+INCLUDES += -I$(PKGDIRBASE)/libnfs/nfs
+INCLUDES += -I$(PKGDIRBASE)/libnfs/portmap
+INCLUDES += -I$(PKGDIRBASE)/libnfs/rquota

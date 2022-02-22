@@ -1,0 +1,40 @@
+MODULE := libnfs
+
+CFLAGS += -DHAVE_ARPA_INET_H
+CFLAGS += -DHAVE_NETINET_IN_H
+CFLAGS += -DHAVE_SOCKADDR_STORAGE
+#CFLAGS += -DHAVE_STRINGS_H
+CFLAGS += -DHAVE_SYS_SOCKET_H
+CFLAGS += -DHAVE_SYS_TIME_H
+CFLAGS += -DHAVE_UNISTD_H
+
+#CFLAGS += -D"_U_=__attribute__((unused))"
+#CFLAGS += -D"u_int=unsigned"
+#CFLAGS += -D"getpid(x)=0"
+#CFLAGS += -DIFNAMSIZ=8
+
+CFLAGS +=-Wno-format
+CFLAGS +=-Wno-incompatible-pointer-types
+CFLAGS +=-Wno-address-of-packed-member
+CFLAGS +=-Wno-unused-variable
+CFLAGS +=-Wno-unused-parameter
+CFLAGS +=-Wno-implicit-fallthrough
+CFLAGS +=-Wno-sign-compare
+
+SRC += lib/libnfs.c
+SRC += lib/socket.c
+SRC += lib/init.c
+SRC += lib/pdu.c
+SRC += lib/libnfs-zdr.c
+SRC += portmap/portmap.c
+SRC += portmap/libnfs-raw-portmap.c
+SRC += mount/mount.c
+SRC += mount/libnfs-raw-mount.c
+SRC += nfs/nfs.c
+SRC += nfs/nfsacl.c
+SRC += nfs/libnfs-raw-nfs.c
+SRC += rquota/rquota.c
+SRC += rquota/libnfs-raw-rquota.c
+
+
+include $(RIOTBASE)/Makefile.base
