@@ -1,0 +1,20 @@
+/**
+ * @defgroup pkg_msquic msquic library
+ * @ingroup  pkg
+ * @ingroup  sys
+ * @brief    Cross-platform, C implementation of the IETF QUIC protocol
+ *
+ * MsQuic is a Microsoft implementation of the IETF QUIC protocol. It is
+ * cross-platform, written in C and designed to be a general purpose QUIC
+ * library.
+ *
+ * ## Usage
+ *
+ * Just add it as a package in your application:
+ *
+ * ```makefile
+ * USEPKG += msquic
+ * ```
+ *
+ * @see      https://github.com/microsoft/msquic
+ */

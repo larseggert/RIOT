@@ -1,0 +1,5 @@
+FEATURES_REQUIRED += arch_32bit
+
+USEMODULE += posix_inet
+USEMODULE += pthread
+#USEMODULE += ztimer

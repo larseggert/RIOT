@@ -1,0 +1,4 @@
+config PACKAGE_MSQUIC
+    bool "Cross-platform, C implementation of the IETF QUIC protocol"
+#    depends on TEST_KCONFIG
+#    depends on HAS_ARCH_32BIT
