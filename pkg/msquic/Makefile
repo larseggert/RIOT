@@ -24,7 +24,7 @@ $(BINDIR)/libmsquic.a: $(PKG_BUILD_DIR)/bin/Release/libmsquic.a
 	cp $(PKG_BUILD_DIR)/bin/Release/libmsquic.a $(BINDIR)/libmsquic.a
 
 $(PKG_BUILD_DIR)/bin/Release/libmsquic.a: $(PKG_BUILD_DIR)/Makefile
-	cmake --build $(PKG_BUILD_DIR) --target msquic_lib -v
+	cmake --build $(PKG_BUILD_DIR) --target msquic_lib
 
 $(PKG_BUILD_DIR)/Makefile: $(PKG_PREPARED) $(TOOLCHAIN_FILE) | ..cmake_version_supported
 	cmake -B$(PKG_BUILD_DIR) -H$(PKG_SOURCE_DIR) \
