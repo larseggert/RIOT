@@ -4,6 +4,7 @@ ARCHIVES += $(BINDIR)/libmsquic.a
 ifneq (,$(filter msquic,$(USEPKG)))
   CFLAGS += -Wno-pedantic -Wno-strict-prototypes -Wno-missing-include-dirs \
             -Wno-old-style-definition -Wno-cast-align -Wno-unknown-pragmas \
+            -Wno-unused-parameter -Wno-error=unused-variable \
             -DCX_PLATFORM_RIOT
 endif
 

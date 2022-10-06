@@ -859,7 +859,7 @@ main(
     )
 {
     QUIC_STATUS Status = QUIC_STATUS_SUCCESS;
-
+    puts("msquic main");
     //
     // Open a handle to the library and get the API function table.
     //

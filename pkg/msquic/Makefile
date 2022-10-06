@@ -12,8 +12,7 @@ include $(RIOTBASE)/pkg/pkg.mk
 
 CMAKE_MINIMAL_VERSION = 3.16
 
-CFLAGS := $(filter-out -Werror, $(CFLAGS)) $(INCLUDES) \
-
+CFLAGS := $(filter-out -Werror, $(CFLAGS)) $(INCLUDES)
 
 TOOLCHAIN_FILE = $(PKG_SOURCE_DIR)/xcompile-toolchain.cmake
 
@@ -29,13 +28,13 @@ $(PKG_BUILD_DIR)/Makefile: $(PKG_PREPARED) $(TOOLCHAIN_FILE) | ..cmake_version_s
 	cmake -B$(PKG_BUILD_DIR) -H$(PKG_SOURCE_DIR) \
 		-DQUIC_BUILD_TOOLS=OFF -DQUIC_BUILD_TEST=OFF \
 		-DQUIC_BUILD_PERF=OFF -DQUIC_BUILD_SHARED=OFF \
-		-DQUIC_ENABLE_LOGGING=OFF \
+		-DQUIC_ENABLE_LOGGING=ON \
 		-DCMAKE_TOOLCHAIN_FILE=$(TOOLCHAIN_FILE) \
 		-DCMAKE_BUILD_TYPE=$(BUILD_TYPE) \
 		-DRIOT=ON
 
 $(PKG_BUILD_DIR)/bin/$(BUILD_TYPE)/libmsquic.a: $(PKG_BUILD_DIR)/Makefile
-	cmake --build $(PKG_BUILD_DIR) --target msquic_lib
+	cmake --build $(PKG_BUILD_DIR) --target msquic_lib -v
 
 $(BINDIR)/libmsquic.a: $(PKG_BUILD_DIR)/bin/$(BUILD_TYPE)/libmsquic.a
 	cmake --install $(PKG_BUILD_DIR) --prefix $(BINDIR)
