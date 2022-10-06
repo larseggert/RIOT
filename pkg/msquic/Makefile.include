@@ -2,7 +2,8 @@ INCLUDES += -I$(BINDIR)/include
 ARCHIVES += $(BINDIR)/libmsquic.a
 
 ifneq (,$(filter msquic,$(USEPKG)))
-  CFLAGS += -DCX_PLATFORM_RIOT -Wno-unknown-pragmas -Wno-strict-prototypes \
-            -Wno-old-style-definition -Wno-cast-align
+  CFLAGS += -Wno-pedantic -Wno-strict-prototypes -Wno-missing-include-dirs \
+            -Wno-old-style-definition -Wno-cast-align -Wno-unknown-pragmas \
+            -DCX_PLATFORM_RIOT
 endif
 

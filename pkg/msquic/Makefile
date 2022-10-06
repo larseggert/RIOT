@@ -12,19 +12,18 @@ include $(RIOTBASE)/pkg/pkg.mk
 
 CMAKE_MINIMAL_VERSION = 3.16
 
-CFLAGS = $(INCLUDES) $(CFLAGS_CPU) -ffunction-sections -fdata-sections
-# --std=gnu99
+CFLAGS := $(filter-out -Werror, $(CFLAGS)) $(INCLUDES) \
+
 
 TOOLCHAIN_FILE = $(PKG_SOURCE_DIR)/xcompile-toolchain.cmake
 
 all: $(BINDIR)/libmsquic.a
 
-$(BINDIR)/libmsquic.a: $(PKG_BUILD_DIR)/bin/Release/libmsquic.a
-	cmake --install $(PKG_BUILD_DIR) --prefix $(BINDIR)
-	cp $(PKG_BUILD_DIR)/bin/Release/libmsquic.a $(BINDIR)/libmsquic.a
+# BUILD_TYPE = MinSizeRel
+BUILD_TYPE = Debug
 
-$(PKG_BUILD_DIR)/bin/Release/libmsquic.a: $(PKG_BUILD_DIR)/Makefile
-	cmake --build $(PKG_BUILD_DIR) --target msquic_lib
+$(TOOLCHAIN_FILE): FORCE
+	$(RIOTTOOLS)/cmake/generate-xcompile-toolchain.sh > $(TOOLCHAIN_FILE)
 
 $(PKG_BUILD_DIR)/Makefile: $(PKG_PREPARED) $(TOOLCHAIN_FILE) | ..cmake_version_supported
 	cmake -B$(PKG_BUILD_DIR) -H$(PKG_SOURCE_DIR) \
@@ -32,12 +31,15 @@ $(PKG_BUILD_DIR)/Makefile: $(PKG_PREPARED) $(TOOLCHAIN_FILE) | ..cmake_version_s
 		-DQUIC_BUILD_PERF=OFF -DQUIC_BUILD_SHARED=OFF \
 		-DQUIC_ENABLE_LOGGING=OFF \
 		-DCMAKE_TOOLCHAIN_FILE=$(TOOLCHAIN_FILE) \
-		-DCMAKE_C_FLAGS="$(CFLAGS)" \
-		-DCMAKE_BUILD_TYPE=MinSizeRel \
+		-DCMAKE_BUILD_TYPE=$(BUILD_TYPE) \
 		-DRIOT=ON
 
-$(TOOLCHAIN_FILE): FORCE
-	$(RIOTTOOLS)/cmake/generate-xcompile-toolchain.sh > $(TOOLCHAIN_FILE)
+$(PKG_BUILD_DIR)/bin/$(BUILD_TYPE)/libmsquic.a: $(PKG_BUILD_DIR)/Makefile
+	cmake --build $(PKG_BUILD_DIR) --target msquic_lib
+
+$(BINDIR)/libmsquic.a: $(PKG_BUILD_DIR)/bin/$(BUILD_TYPE)/libmsquic.a
+	cmake --install $(PKG_BUILD_DIR) --prefix $(BINDIR)
+	cp $(PKG_BUILD_DIR)/bin/$(BUILD_TYPE)/libmsquic.a $(BINDIR)/libmsquic.a
 
 ..cmake_version_supported:
 	@ # Remove '-rcX' from version as they are not well handled
