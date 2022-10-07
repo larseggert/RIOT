@@ -12,7 +12,8 @@ include $(RIOTBASE)/pkg/pkg.mk
 
 CMAKE_MINIMAL_VERSION = 3.16
 
-CFLAGS := $(filter-out -Werror, $(CFLAGS)) $(INCLUDES)
+# REMOVE_CFLAGS =-Werror -fshort-enums
+CFLAGS := $(filter-out $(REMOVE_CFLAGS), $(CFLAGS)) $(INCLUDES)
 
 TOOLCHAIN_FILE = $(PKG_SOURCE_DIR)/xcompile-toolchain.cmake
 

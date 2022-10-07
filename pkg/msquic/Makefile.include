@@ -1,10 +1,11 @@
-INCLUDES += -I$(BINDIR)/include
+INCLUDES += -I$(PKGDIRBASE)/msquic/src/inc
 ARCHIVES += $(BINDIR)/libmsquic.a
 
 ifneq (,$(filter msquic,$(USEPKG)))
-  CFLAGS += -Wno-pedantic -Wno-strict-prototypes -Wno-missing-include-dirs \
+  CFLAGS += -Wno-pedantic -Wno-strict-prototypes  \
             -Wno-old-style-definition -Wno-cast-align -Wno-unknown-pragmas \
-            -Wno-unused-parameter -Wno-error=unused-variable \
+            -Wno-unused-parameter -Wno-unused-variable -Wno-sign-compare \
+            -fno-short-enums \
             -DCX_PLATFORM_RIOT
 endif
 

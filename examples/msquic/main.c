@@ -270,7 +270,7 @@ _IRQL_requires_max_(DISPATCH_LEVEL)
     // A resumption ticket (also called New Session Ticket or NST) was
     // received from the server.
     //
-    printf("[conn][%p] Resumption ticket received (%u bytes):\n", Connection,
+    printf("[conn][%p] Resumption ticket received (%"PRIu32" bytes):\n", Connection,
            Event->RESUMPTION_TICKET_RECEIVED.ResumptionTicketLength);
     for (uint32_t i = 0;
          i < Event->RESUMPTION_TICKET_RECEIVED.ResumptionTicketLength; i++) {
