@@ -5,6 +5,7 @@ ifneq (,$(filter msquic,$(USEPKG)))
   CFLAGS += -Wno-pedantic -Wno-strict-prototypes  \
             -Wno-old-style-definition -Wno-cast-align -Wno-unknown-pragmas \
             -Wno-unused-parameter -Wno-unused-variable -Wno-sign-compare \
+            -Wno-implicit-function-declaration \
             -fno-short-enums \
             -DCX_PLATFORM_RIOT
 endif
