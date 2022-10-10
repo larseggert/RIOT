@@ -4,4 +4,8 @@ USEMODULE += random
 USEMODULE += ztimer_msec
 
 USEPKG += wolfssl
+USEMODULE += wolfcrypt
 USEMODULE += wolfcrypt_hmac
+USEMODULE += wolfcrypt_sha256
+USEMODULE += wolfcrypt_sha384
+USEMODULE += wolfcrypt_sha512

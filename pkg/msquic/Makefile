@@ -17,7 +17,7 @@ CFLAGS := $(filter-out $(REMOVE_CFLAGS), $(CFLAGS)) $(INCLUDES)
 
 TOOLCHAIN_FILE = $(PKG_SOURCE_DIR)/xcompile-toolchain.cmake
 
-all: $(BINDIR)/libmsquic.a
+all: $(BINDIR)/msquic/libmsquic.a
 
 # BUILD_TYPE = MinSizeRel
 BUILD_TYPE = Debug
@@ -37,9 +37,9 @@ $(PKG_BUILD_DIR)/Makefile: $(PKG_PREPARED) $(TOOLCHAIN_FILE) | ..cmake_version_s
 $(PKG_BUILD_DIR)/bin/$(BUILD_TYPE)/libmsquic.a: $(PKG_BUILD_DIR)/Makefile
 	cmake --build $(PKG_BUILD_DIR) --target msquic_lib
 
-$(BINDIR)/libmsquic.a: $(PKG_BUILD_DIR)/bin/$(BUILD_TYPE)/libmsquic.a
-	cmake --install $(PKG_BUILD_DIR) --prefix $(BINDIR)
-	cp $(PKG_BUILD_DIR)/bin/$(BUILD_TYPE)/libmsquic.a $(BINDIR)/libmsquic.a
+$(BINDIR)/msquic/libmsquic.a: $(PKG_BUILD_DIR)/bin/$(BUILD_TYPE)/libmsquic.a
+	cmake --install $(PKG_BUILD_DIR) --prefix $(BINDIR)/msquic
+	cp $(PKG_BUILD_DIR)/bin/$(BUILD_TYPE)/libmsquic.a $(BINDIR)/msquic/libmsquic.a
 
 ..cmake_version_supported:
 	@ # Remove '-rcX' from version as they are not well handled
@@ -47,7 +47,7 @@ $(BINDIR)/libmsquic.a: $(PKG_BUILD_DIR)/bin/$(BUILD_TYPE)/libmsquic.a
 	CMAKE_VERSION=$$(cmake --version | sed -n '1 {s/cmake version //;s/-rc.*//;p;}'); \
 	$(RIOTTOOLS)/has_minimal_version/has_minimal_version.sh "$${CMAKE_VERSION}" "$(CMAKE_MINIMAL_VERSION)" cmake
 
-# to avoid clobbering local msquic source changes:
+to avoid clobbering local msquic source changes:
 $(PKG_PATCHED): $(PKG_PATCHED_PREREQUISITES)
 	touch $@
 $(PKG_DOWNLOADED): $(MAKEFILE_LIST)

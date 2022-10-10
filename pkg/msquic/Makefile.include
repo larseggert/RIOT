@@ -1,5 +1,5 @@
 INCLUDES += -I$(PKGDIRBASE)/msquic/src/inc
-ARCHIVES += $(BINDIR)/libmsquic.a
+ARCHIVES += $(BINDIR)/msquic/libmsquic.a
 
 ifneq (,$(filter msquic,$(USEPKG)))
   CFLAGS += -Wno-pedantic -Wno-strict-prototypes  \
