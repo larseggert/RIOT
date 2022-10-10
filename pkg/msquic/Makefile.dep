@@ -1,5 +1,7 @@
-#FEATURES_REQUIRED += arch_32bit
-
+USEMODULE += event
 USEMODULE += posix_inet
 USEMODULE += random
 USEMODULE += ztimer_msec
+
+USEPKG += wolfssl
+USEMODULE += wolfcrypt_hmac

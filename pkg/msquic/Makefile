@@ -35,7 +35,7 @@ $(PKG_BUILD_DIR)/Makefile: $(PKG_PREPARED) $(TOOLCHAIN_FILE) | ..cmake_version_s
 		-DRIOT=ON
 
 $(PKG_BUILD_DIR)/bin/$(BUILD_TYPE)/libmsquic.a: $(PKG_BUILD_DIR)/Makefile
-	cmake --build $(PKG_BUILD_DIR) --target msquic_lib -v
+	cmake --build $(PKG_BUILD_DIR) --target msquic_lib
 
 $(BINDIR)/libmsquic.a: $(PKG_BUILD_DIR)/bin/$(BUILD_TYPE)/libmsquic.a
 	cmake --install $(PKG_BUILD_DIR) --prefix $(BINDIR)
