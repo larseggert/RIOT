@@ -17,6 +17,8 @@ CFLAGS += -Wno-maybe-uninitialized
 # this is a false positive.
 CFLAGS += -Wno-cast-align
 
+CFLAGS += -Wno-unused-parameter
+
 .PHONY: wolfcrypt%
 
 all: $(filter wolfcrypt wolfcrypt-test wolfcrypt-benchmark,$(USEMODULE))

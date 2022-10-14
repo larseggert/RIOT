@@ -1,11 +1,14 @@
 INCLUDES += -I$(PKGDIRBASE)/msquic/src/inc
 ARCHIVES += $(BINDIR)/msquic/libmsquic.a
 
+# -Wno-strict-prototypes  \
+#             -Wno-old-style-definition -Wno-cast-align  \
+#             -Wno-unused-parameter -Wno-unused-variable -Wno-sign-compare \
+#             -Wno-implicit-function-declaration \
+            -Wno-error=format -Wno-format-extra-args \
+
 ifneq (,$(filter msquic,$(USEPKG)))
-  CFLAGS += -Wno-pedantic -Wno-strict-prototypes  \
-            -Wno-old-style-definition -Wno-cast-align -Wno-unknown-pragmas \
-            -Wno-unused-parameter -Wno-unused-variable -Wno-sign-compare \
-            -Wno-implicit-function-declaration \
+  CFLAGS += -Wno-pedantic -Wno-unknown-pragmas -Wno-cast-align \
             -fno-short-enums \
             -DCX_PLATFORM_RIOT
 endif

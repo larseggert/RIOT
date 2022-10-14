@@ -29,6 +29,7 @@ SRC +=  error.c \
 #-------------------------------------------------------------#
 
 # Enabled by default
+SRC +=  kdf.c
 SRC +=  sha.c
 SRC +=  sha256.c
 SRC +=  fe_low_mem.c

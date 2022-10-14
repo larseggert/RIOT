@@ -46,20 +46,22 @@ extern "C" {
  * at compile time (via USEMODULE)
  */
 #ifndef MODULE_WOLFSSL_TLS
-#ifndef MODULE_WOLFSSL_TLS13
 #define WOLFCRYPT_ONLY
 #else
-#define NO_OLD_TLS
 #define HAVE_TLS_EXTENSIONS
-#define HAVE_AES_DECRYPT
+#ifdef MODULE_WOLFSSL_TLS13
+#define NO_OLD_TLS
+// #define HAVE_AES_DECRYPT
+#define HAVE_ALPN
+#define HAVE_SNI
+#define HAVE_HKDF
+// #define HAVE_AES
 #define HAVE_AESGCM
 #define GCM_SMALL
-#define HAVE_AESCCM
-#define WOLFSSL_AES_COUNTER
-#define WOLFSSL_AES_DIRECT
+#define HAVE_SESSION_TICKET
+// #define WOLFSSL_AES_COUNTER
+// #define WOLFSSL_AES_DIRECT
 #endif
-#else
-#define HAVE_TLS_EXTENSIONS
 #endif
 
 /* Align on 32-bit (exc. native,
@@ -217,6 +219,16 @@ int strncasecmp(const char *s1, const char * s2, unsigned int sz);
 #undef NO_PWDBASED
 #ifndef MODULE_WOLFCRYPT_PWDBASED
 #define NO_PWDBASED
+#endif
+
+#undef WOLFSSL_STATIC_DH
+#ifdef MODULE_WOLFSSL_DH
+#define WOLFSSL_STATIC_DH
+#endif
+
+#undef WOLFSSL_STATIC_RSA
+#ifdef MODULE_WOLFSSL_RSA
+#define WOLFSSL_STATIC_RSA
 #endif
 
 #undef WOLFSSL_STATIC_PSK

@@ -1,11 +1,34 @@
-USEMODULE += event
+# To include the default network device(s) on your board:
+USEMODULE += netdev_default
+# To auto-initialize these network devices as GNRC network interfaces:
+USEMODULE += auto_init_gnrc_netif
+# For basic IPv6 (and 6LoWPAN) functionalities:
+USEMODULE += gnrc_ipv6
+# For some basic IPv4 functions and other generic Internet stuff:
+USEMODULE += ipv4_addr
 USEMODULE += posix_inet
+# For UDP support:
+USEMODULE += gnrc_udp
+# For DNS:
+USEMODULE += auto_init_sock_dns
+USEMODULE += sock_dns
+
+USEMODULE += event
 USEMODULE += random
 USEMODULE += ztimer_msec
 
 USEPKG += wolfssl
-USEMODULE += wolfcrypt
-USEMODULE += wolfcrypt_hmac
-USEMODULE += wolfcrypt_sha256
-USEMODULE += wolfcrypt_sha384
-USEMODULE += wolfcrypt_sha512
+# USEMODULE += wolfcrypt
+# USEMODULE += wolfcrypt_aes
+# USEMODULE += wolfcrypt_hmac
+#USEMODULE += wolfcrypt_sha256
+#USEMODULE += wolfcrypt_sha384
+#USEMODULE += wolfcrypt_sha512
+# USEMODULE += wolfssl_tls
+USEMODULE += wolfssl_tls13
+USEMODULE += wolfssl_psk
+USEMODULE += wolfssl_dh
+
+# CAN BE REMOVED:
+# extra utilities for endpoint printing
+USEMODULE += sock_util
